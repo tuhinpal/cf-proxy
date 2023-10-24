@@ -6,6 +6,8 @@ export interface Env {}
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
 		const url = new URL(request.url);
+		const workerHostname = url.hostname;
+
 		url.hostname = base.hostname;
 
 		const res = await fetch(url.toString(), {
@@ -24,7 +26,9 @@ export default {
 		const contentType = res.headers.get('content-type');
 
 		if (contentType && contentType.includes('text/html')) {
-			responseBody = await htmlTransformer(res);
+			responseBody = await htmlTransformer(res, {
+				workerHostname,
+			});
 		} else {
 			responseBody = await res.arrayBuffer();
 			if (responseBody.byteLength === 0) responseBody = null;
