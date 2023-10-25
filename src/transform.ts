@@ -35,11 +35,11 @@ export default async function htmlTransformer(
 			}
 		}
 
-		text(text: Text) {
-			if (text.text.includes(base.hostname)) {
-				text.replace(text.text.replace(base.hostname, workerHostname));
-			}
-		}
+		// text(text: Text) {
+		// 	if (text.text.includes(base.hostname)) {
+		// 		text.replace(text.text.replace(base.hostname, workerHostname));
+		// 	}
+		// }
 	}
 
 	class AdBlocker {
