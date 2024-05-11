@@ -11,4 +11,5 @@ export interface Config {
 		TEXT_REPLACER_ENABLED: boolean;
 		ON_DEMAND_HOST_CONFIG_ENABLED: boolean;
 	};
+	ON_DEMAND_HOST: null | string;
 }

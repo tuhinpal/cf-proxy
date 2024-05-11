@@ -22,12 +22,14 @@ export const parseConfig = (env: Env, request: Request): Config => {
 			TEXT_REPLACER_ENABLED: env.FEATURE_FLAGS?.includes('TEXT_REPLACER') || false,
 			ON_DEMAND_HOST_CONFIG_ENABLED: env.FEATURE_FLAGS?.includes('ON_DEMAND_HOST_CONFIG') || false,
 		},
+		ON_DEMAND_HOST: null,
 	};
 
 	if (config.FEATURE_FLAGS.ON_DEMAND_HOST_CONFIG_ENABLED && queryParams.get('host')) {
 		try {
 			const newBase = new URL(`https://${queryParams.get('host')}`); // `https://` is required to parse `host` as `hostname`
 			config.BASE = newBase;
+			config.ON_DEMAND_HOST = queryParams.get('host');
 		} catch {}
 	}
 

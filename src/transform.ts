@@ -33,9 +33,19 @@ export default async function htmlTransformer(
 				return;
 			}
 
-			if (url.includes(config.BASE.hostname)) {
-				element.setAttribute(replace, url.replace(new RegExp(config.BASE.hostname, 'gi'), workerHostname));
-			}
+			try {
+				const urlObj = new URL(url, config.BASE);
+
+				if (urlObj.hostname === config.BASE.hostname) {
+					urlObj.hostname = workerHostname;
+
+					if (config.ON_DEMAND_HOST) {
+						urlObj.searchParams.set('host', config.ON_DEMAND_HOST);
+					}
+
+					element.setAttribute(replace, urlObj.toString());
+				}
+			} catch {}
 		}
 
 		text(text: Text) {
