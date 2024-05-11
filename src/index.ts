@@ -10,6 +10,15 @@ export default {
 
 		url.hostname = base.hostname;
 
+		const queryParam = url.searchParams;
+		if (queryParam.get('host')) {
+			try {
+				const hostUrl = new URL(queryParam.get('host')!);
+				url.hostname = hostUrl.hostname;
+				queryParam.delete('host');
+			} catch (_) {}
+		}
+
 		const res = await fetch(url.toString(), {
 			method: request.method,
 			headers: {
