@@ -25,9 +25,10 @@ export const parseConfig = (env: Env, request: Request): Config => {
 		ON_DEMAND_HOST: null,
 	};
 
-	if (config.FEATURE_FLAGS.ON_DEMAND_HOST_CONFIG_ENABLED && queryParams.get('host')) {
+	const onDemandHostParam = queryParams.get('host');
+	if (config.FEATURE_FLAGS.ON_DEMAND_HOST_CONFIG_ENABLED && onDemandHostParam) {
 		try {
-			const newBase = new URL(`https://${queryParams.get('host')}`); // `https://` is required to parse `host` as `hostname`
+			const newBase = new URL(onDemandHostParam.startsWith("http") ? onDemandHostParam : `https://${onDemandHostParam}`); // `https://` is required to parse `host` as `hostname`
 			config.BASE = newBase;
 			config.ON_DEMAND_HOST = queryParams.get('host');
 		} catch {}
