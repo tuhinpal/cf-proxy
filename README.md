@@ -8,6 +8,7 @@ A fast, efficient, Zero Dependency Cloudflare Proxy with AD Blocker support.
 - Origin Replacer
 - AD Blocker
 - Text Replacer
+- On-Demand Host configuration
 
 ## Deployment 🚀
 
@@ -18,7 +19,7 @@ A fast, efficient, Zero Dependency Cloudflare Proxy with AD Blocker support.
 You need to change two `ENVIROMENT VARIABLES` in the `Cloudflare Workers` dashboard.
 
 - `BASE` - The URL of the website you want to proxy. (e.g. `https://developers.cloudflare.com`)
-- `FEATURE_FLAGS` - Feature flags you want to opt-in. (e.g. `AD_BLOCKER,TEXT_REPLACER`)
+- `FEATURE_FLAGS` - Feature flags you want to opt-in. (e.g. `AD_BLOCKER,TEXT_REPLACER,ON_DEMAND_HOST_CONFIG`)
 
 Additionally, open the `wrangler.toml` file and change the `BASE` and `FEATURE_FLAGS` values.
 
@@ -28,6 +29,7 @@ Features flags are comma separated values that you can use to enable or disable 
 
 - `AD_BLOCKER` - Enable AD Blocker
 - `TEXT_REPLACER` - Enable Text Replacer
+- `ON_DEMAND_HOST_CONFIG` - Enable On-Demand Host configuration by adding `?host=example.com` in the URL
 
 ## Development 🛠️
 

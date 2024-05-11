@@ -12,12 +12,24 @@ export const publicCdn = [
 	'gravatar.com',
 ];
 
-export const parseConfig = (env: Env): Config => {
-	return {
+export const parseConfig = (env: Env, request: Request): Config => {
+	const queryParams = new URL(request.url).searchParams;
+
+	let config: Config = {
 		BASE: new URL(env.BASE),
 		FEATURE_FLAGS: {
 			AD_BLOCKER_ENABLED: env.FEATURE_FLAGS?.includes('AD_BLOCKER') || false,
 			TEXT_REPLACER_ENABLED: env.FEATURE_FLAGS?.includes('TEXT_REPLACER') || false,
+			ON_DEMAND_HOST_CONFIG_ENABLED: env.FEATURE_FLAGS?.includes('ON_DEMAND_HOST_CONFIG') || false,
 		},
 	};
+
+	if (config.FEATURE_FLAGS.ON_DEMAND_HOST_CONFIG_ENABLED && queryParams.get('host')) {
+		try {
+			const newBase = new URL(`https://${queryParams.get('host')}`); // `https://` is required to parse `host` as `hostname`
+			config.BASE = newBase;
+		} catch {}
+	}
+
+	return config;
 };

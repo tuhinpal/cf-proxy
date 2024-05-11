@@ -5,7 +5,7 @@ import { Env } from './types';
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
 		try {
-			const config = parseConfig(env);
+			const config = parseConfig(env, request);
 
 			const url = new URL(request.url);
 			const workerHostname = url.hostname; // this will be returned as header

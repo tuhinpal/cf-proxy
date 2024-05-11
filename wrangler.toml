@@ -4,4 +4,4 @@ compatibility_date = "2023-10-16"
 
 [vars]
 BASE = "https://thetuhin.com"
-FEATURE_FLAGS = "AD_BLOCKER,TEXT_REPLACER"
+FEATURE_FLAGS = "AD_BLOCKER,TEXT_REPLACER,ON_DEMAND_HOST_CONFIG"
