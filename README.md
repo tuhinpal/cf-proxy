@@ -11,7 +11,7 @@ A fast, efficient, Zero Dependency Cloudflare Proxy with AD Blocker support.
 
 ## Deployment 🚀
 
-[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/tuhinpal/amazon-api)
+[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/tuhinpal/cf-proxy)
 
 ## Post Deployment 🛠️
 
@@ -19,6 +19,8 @@ You need to change two `ENVIROMENT VARIABLES` in the `Cloudflare Workers` dashbo
 
 - `BASE` - The URL of the website you want to proxy. (e.g. `https://developers.cloudflare.com`)
 - `FEATURE_FLAGS` - Feature flags you want to opt-in. (e.g. `AD_BLOCKER,TEXT_REPLACER`)
+
+Additionally, open the `wrangler.toml` file and change the `BASE` and `FEATURE_FLAGS` values.
 
 ## Feature Flags 🚩
 
