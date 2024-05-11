@@ -1,11 +1,14 @@
-import { adBlocker, base, publicCdn } from './config';
+import { publicCdn } from './config';
+import { Config } from './types';
 
 export default async function htmlTransformer(
 	res: Response,
 	{
 		workerHostname,
+		config,
 	}: {
 		workerHostname: string;
+		config: Config;
 	}
 ) {
 	class OriginHandler {
@@ -30,16 +33,16 @@ export default async function htmlTransformer(
 				return;
 			}
 
-			if (url.includes(base.hostname)) {
-				element.setAttribute(replace, url.replace(new RegExp(base.hostname, 'gi'), workerHostname));
+			if (url.includes(config.BASE.hostname)) {
+				element.setAttribute(replace, url.replace(new RegExp(config.BASE.hostname, 'gi'), workerHostname));
 			}
 		}
 
-		// text(text: Text) {
-		// 	if (text.text.includes(base.hostname)) {
-		// 		text.replace(text.text.replace(base.hostname, workerHostname));
-		// 	}
-		// }
+		text(text: Text) {
+			if (config.FEATURE_FLAGS.TEXT_REPLACER_ENABLED && text.text.includes(config.BASE.hostname)) {
+				text.replace(text.text.replace(config.BASE.hostname, workerHostname));
+			}
+		}
 	}
 
 	class AdBlocker {
@@ -69,7 +72,7 @@ export default async function htmlTransformer(
 	// origin handler
 	let transformedResp = new HTMLRewriter().on('*', new OriginHandler()).transform(res);
 
-	if (adBlocker) {
+	if (config.FEATURE_FLAGS.AD_BLOCKER_ENABLED) {
 		// ad blocker
 		transformedResp = new HTMLRewriter().on('script', new AdBlocker()).transform(transformedResp);
 	}

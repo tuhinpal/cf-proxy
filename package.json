@@ -1,6 +1,7 @@
 {
 	"name": "cf-proxy",
-	"version": "0.0.0",
+	"description": "Aa fast, efficient, Zero Dependency Cloudflare Proxy with AD Blocker support.",
+	"version": "0.0.1",
 	"private": true,
 	"scripts": {
 		"deploy": "wrangler deploy",
@@ -11,5 +12,22 @@
 		"@cloudflare/workers-types": "^4.20230419.0",
 		"typescript": "^5.0.4",
 		"wrangler": "^3.0.0"
-	}
+	},
+	"main": "src/index.ts",
+	"dependencies": {},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/tuhinpal/cf-proxy.git"
+	},
+	"keywords": [
+		"cloudflare-proxy",
+		"cloudflare",
+		"proxy"
+	],
+	"author": "Tuhin Kanti Pal <me@thetuhin.com>",
+	"license": "Apache-2.0",
+	"bugs": {
+		"url": "https://github.com/tuhinpal/cf-proxy/issues"
+	},
+	"homepage": "https://github.com/tuhinpal/cf-proxy#readme"
 }
