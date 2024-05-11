@@ -1,6 +1,6 @@
 {
 	"name": "cf-proxy",
-	"description": "Aa fast, efficient, Zero Dependency Cloudflare Proxy with AD Blocker support.",
+	"description": "A fast, efficient, Zero Dependency Cloudflare Proxy with AD Blocker support.",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
